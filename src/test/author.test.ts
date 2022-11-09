@@ -1,6 +1,6 @@
-import request from 'supertest';
-import App from '../src/app';
-import AuthorController from '../src/resources/author/author.controller'
+// import request from 'supertest';
+// import App from '../src/app';
+// import AuthorController from '../src/resources/author/author.controller'
 
 
 // NOT WORKING
