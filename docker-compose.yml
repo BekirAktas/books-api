@@ -5,6 +5,10 @@ services:
     build: ./
     ports:
       - 3000:3000
+    volumes:
+      - .:/home/node/app
+    links:
+      - mongodb_container
   mongodb_container:
     image: mongo:latest
     environment:
