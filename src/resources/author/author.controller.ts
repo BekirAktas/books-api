@@ -60,16 +60,16 @@ class AuthorController implements Controller {
     }
 
     private updateAuthor = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
-        // try {
+        try {
             const { name, country, birth_date } = req.body;
 
             const updatedAuthor = await this.AuthorService.update(req.params.id, name, country, birth_date);
 
             res.status(201).json({ updatedAuthor });
 
-        // } catch (error) {
-        //     next(new HttpException(400, 'Cannot get authors'));
-        // }
+        } catch (error) {
+            next(new HttpException(400, 'Cannot get authors'));
+        }
     }
 }
 
