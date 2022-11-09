@@ -9,8 +9,29 @@ To show api documentation
 
 ## Application Usage with Docker
 
-to create image inside project folder run ``` docker build --tag books-rest-api .``` command. ( do not forget to put ' **.** ' (the dot at the end of the command). Then to run that image ``` docker run -p 3000:3000 books-rest-api ``` command. Then container will be up on ``` http://localhost:3000/ ```
+You can call ``` docker compose up ``` command to up project. Then container will be up on ``` http://localhost:3000/ ```
 
 ## Application Usage
 
 to start application without Docker, inside project folder install packages with ``` npm install ``` command then start the application with ```npm run dev ``` command.
+
+## END POINTS
+
+### AUTHOR 
+| Method | URL | fields |
+| --------------- | --------------- | --------------- |
+| GET | /api/authors | - |
+| POST | /api/authors | name*, country*, birh_date* |
+| PATCH | /authors/:authorId | name*, country*, birh_date* |
+
+### BOOKS
+
+| Method | URL | fields |
+| --------------- | --------------- | --------------- |
+| GET | /api/books | - |
+| POST | /api/books | title*, author*, price*, ISBN*, language*, number_of_pages*, publisher* |
+| PATCH | /api/books/:bookId | title*, author*, price*, ISBN*, language*, number_of_pages*, publisher* |
+| GET | /api/books/:bookId | - |
+| DELETE | /api/books/:bookId | - |
+
+*fields are required
