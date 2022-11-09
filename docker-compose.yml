@@ -1,7 +1,19 @@
-version: '3.0'
+version: '3.7'
 services:
   app:
     container_name: books
     build: ./
     ports:
       - 3000:3000
+  mongodb_container:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: Bekir1439
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:
