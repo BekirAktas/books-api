@@ -68,7 +68,7 @@ class AuthorController implements Controller {
             res.status(201).json({ updatedAuthor });
 
         } catch (error) {
-            next(new HttpException(400, 'Cannot get authors'));
+            next(new HttpException(400, 'Cannot update authors'));
         }
     }
 }
