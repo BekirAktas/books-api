@@ -43,7 +43,8 @@ class App {
 
     private initialiseDatabaseConnection(): void {
         // const {MONGO_USER, MONGO_PASSWORD, MONGO_PATH} = process.env;
-        mongoose.connect('mongodb://mongodb:27017');
+        mongoose.connect('mongodb://root:rootpassword@mongodb:27017');
+        // to connect database without docker
         // mongoose.connect(
         //     `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
         // );
