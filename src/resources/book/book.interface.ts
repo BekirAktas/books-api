@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import Author from '@/resources/author/author.interface';
+import Author from '../author/author.interface';
 
 export default interface Book extends Document {
     title: string;

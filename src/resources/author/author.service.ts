@@ -1,5 +1,5 @@
-import AuthorModel from '@/resources/author/author.model';
-import Author from '@/resources/author/author.interface';
+import AuthorModel from './author.model';
+import Author from './author.interface';
 
 class AuthorService {
     private author = AuthorModel;

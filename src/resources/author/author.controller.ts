@@ -1,9 +1,9 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import Controller from '@/utils/interfaces/controller.interface';
-import HttpException from '@/utils/exceptions/http.exception';
-import validationMiddleware from '@/middleware/validation.middleware';
-import validate from '@/resources/author/author.validation';
-import AuthorService from '@/resources/author/author.service';
+import Controller from '../../utils/interfaces/controller.interface';
+import HttpException from '../../utils/exceptions/http.exception';
+import validationMiddleware from '../../middleware/validation.middleware';
+import validate from '../../resources/author/author.validation';
+import AuthorService from './author.service';
 
 class AuthorController implements Controller {
     public path = '/authors';

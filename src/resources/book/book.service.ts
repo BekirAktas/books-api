@@ -1,6 +1,6 @@
-import BookModel from '@/resources/book/book.model';
-import Book from '@/resources/book/book.interface';
-import Author from '@/resources/author/author.interface';
+import BookModel from './book.model';
+import Book from './book.interface';
+import Author from '../author/author.interface';
 
 class BookService {
     private book = BookModel;
