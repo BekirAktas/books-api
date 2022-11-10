@@ -6,71 +6,76 @@ import validate from '../../resources/author/author.validation';
 import AuthorService from './author.service';
 
 class AuthorController implements Controller {
-    public path = '/authors';
-    public router = Router();
-    private AuthorService = new AuthorService();
+  public path = '/authors';
+  public router = Router();
+  private AuthorService = new AuthorService();
 
-    constructor() {
-        this.initialiseRoutes();
+  constructor() {
+    this.initialiseRoutes();
+  }
+
+  private initialiseRoutes(): void {
+    this.router.post(
+      `${this.path}`,
+      validationMiddleware(validate.create),
+      this.createAuthor
+    );
+
+    this.router.get(`${this.path}`, this.getAll);
+
+    this.router.patch(`${this.path}/:id`, this.updateAuthor);
+  }
+
+  private createAuthor = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const { name, country, birth_date } = req.body;
+
+      const author = await this.AuthorService.create(name, country, birth_date);
+
+      res.status(201).json({ author });
+    } catch (error) {
+      next(new HttpException(400, 'Cannot create author'));
     }
+  };
 
-    private initialiseRoutes(): void {
-        this.router.post(
-            `${this.path}`,
-            validationMiddleware(validate.create),
-            this.createAuthor
-        )
+  private getAll = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const authors = await this.AuthorService.getAll();
 
-        this.router.get(
-            `${this.path}`,
-            this.getAll
-        )
-
-        this.router.patch(
-            `${this.path}/:id`,
-            this.updateAuthor
-        )
+      res.status(200).json({ authors });
+    } catch (error) {
+      next(new HttpException(400, 'Cannot get authors'));
     }
+  };
 
-    private createAuthor = async (
-        req: Request,
-        res: Response,
-        next: NextFunction,
+  private updateAuthor = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const { name, country, birth_date } = req.body;
 
-    ): Promise<Response | void> => {
-        try {
-            const { name, country, birth_date } = req.body;
+      const updatedAuthor = await this.AuthorService.update(
+        req.params.id,
+        name,
+        country,
+        birth_date
+      );
 
-            const author = await this.AuthorService.create(name, country, birth_date);
-
-            res.status(201).json({ author });
-        } catch (error) {
-            next(new HttpException(400, 'Cannot create author'));
-        }
+      res.status(201).json({ updatedAuthor });
+    } catch (error) {
+      next(new HttpException(400, 'Cannot update authors'));
     }
-
-    private getAll = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
-        try {
-            const authors = await this.AuthorService.getAll();
-            
-            res.status(200).json({authors});
-        } catch (error) {
-            next(new HttpException(400, 'Cannot get authors'));
-        }
-    }
-
-    private updateAuthor = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
-        try {
-            const { name, country, birth_date } = req.body;
-
-            const updatedAuthor = await this.AuthorService.update(req.params.id, name, country, birth_date);
-
-            res.status(201).json({ updatedAuthor });
-
-        } catch (error) {
-            next(new HttpException(400, 'Cannot update authors'));
-        }
-    }
+  };
 }
 
 export default AuthorController;
